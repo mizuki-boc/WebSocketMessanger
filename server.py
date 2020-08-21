@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template("index.html", massage="hello")
+    return render_template("index.html")
 
 @app.route('/pipe')
 def pipe():
@@ -24,14 +24,14 @@ def pipe():
            if message is None:
                print("message is none.")
                break
-        #    datetime_now = datetime.datetime.now()
-        #    data = {
-        #        'time': str(datetime_now),
-        #        'message': message
-        #    }
-        #    ws.send(json.dumps(data))
-           print(message)
-        #    print(data)
+            datetime_now = datetime.datetime.now()
+            data = {
+                'time': str(datetime_now),
+                'message': message
+            }
+            # ws.send(json.dumps(data))
+            ws.send(data)
+            print(data)
    return
 
 

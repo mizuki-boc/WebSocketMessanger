@@ -12,7 +12,6 @@ var connection = new WebSocket("ws://localhost:8888/pipe");
 // });
 
 function send_message() {
-    var msg = document.getElementById("msg");
     // html のボタンが押された時実行される．
     connection.onopen = function(e) {
         console.log("通信が接続されました．");
@@ -21,6 +20,29 @@ function send_message() {
     connection.onerror = function(error) {
         console.log("エラー");
     };
-    connection.send("from browser.");
+
+    // // てすと
+    // var t = document.getElementById("test");
+    // t.innerHTML = event;
+
+    // html 内の button が onClick されたとき，この関数が呼ばれる．
+    var msg = document.getElementById("msg");
     connection.send(msg.value);
+}
+
+connection.onmessage = function (event) {
+    // サーバーからメッセージを取得した時の動き
+    // 以下てすと
+    var newElement = document.createElement("p");
+    // var newContent = document.createTextNode(event.data);
+    newElement.innerHTML = event.data;
+    // newElement.appendChild(newContent);
+
+    var s = "すとりんぐ";
+    console.log(s);
+
+    console.log(event.data);
+
+    var parentDiv = document.getElementById("testdiv");
+    parentDiv.appendChild(newElement);
 }
