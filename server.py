@@ -16,23 +16,23 @@ def main():
 
 @app.route('/pipe')
 def pipe():
-   if request.environ.get('wsgi.websocket'):
-       ws = request.environ['wsgi.websocket']
-       while True:
-           time.sleep(1)
-           message = ws.receive()
-           if message is None:
-               print("message is none.")
-               break
+    if request.environ.get('wsgi.websocket'):
+        ws = request.environ['wsgi.websocket']
+        while True:
+            time.sleep(1)
+            message = ws.receive()
+            if message is None:
+                print("message is none.")
+                break
             datetime_now = datetime.datetime.now()
             data = {
                 'time': str(datetime_now),
                 'message': message
             }
-            # ws.send(json.dumps(data))
-            ws.send(data)
+            ws.send(json.dumps(data))
+            # ws.send(data)
             print(data)
-   return
+    return
 
 
 if __name__ == "__main__":
